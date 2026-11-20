@@ -28,6 +28,17 @@ execute:
   echo: false
 ---
 
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+\banddestacado{El código e imágenes utilizados \\ para crear estas slides estará disponible en: \\ \bigskip \href{https://github.com/placencio-castro/band-uc.git}{https://github.com/placencio-castro/band-uc.git} }
+
+
+```
+
+
 # Introducción
 
 ### Objetivos de la sesión
