@@ -1,1 +1,834 @@
+---
+title: "Capacitación en REDCap"
+subtitle: "Módulo 1 - ¿Qué es REDCap y cómo funciona?"
+author: "Matías Placencio-Castro, PhD"
+institute: "Consultor Arquitectura, Procesamiento y Análisis de Datos \\ Centro BAND Linea 1"
+date: today
+date-format: long
+lang: es
+format:
+  beamer:
+    theme: metropolis
+    themeoptions:
+      - progressbar=frametitle
+      - sectionpage=none
+      - subsectionpage=none
+      - block=fill
+    aspectratio: 169
+    fontsize: 9pt
+    classoption: handout
+    toc: true
+    slide-level: 3
+    pdf-engine: lualatex
+    include-in-header:
+      - file: band-theme.tex
+      - text: |
+          \renewcommand{\bandshorttitle}{Capacitación REDCap - Módulo 1}
+execute:
+  echo: false
+---
+
+
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+\banddestacado{El código e imágenes utilizados \\ para crear estas slides estará disponible en: \\ \bigskip \href{https://github.com/placencio-castro/band-uc.git}{https://github.com/placencio-castro/band-uc.git} }
+
+
+```
+
+# Introducción
+
+### Objetivos de la sesión
+
+
+
+Al finalizar este módulo, cada participante podrá:
+
+1. Explicar qué es REDCap y por qué la Linea 1 decidió usarlo para el estudio longitudinal.
+2. Reconocer los componentes de un proyecto: instrumentos, campos, registros y eventos.
+3. Describir cómo REDCap protege la calidad y la confidencialidad de los datos.
+4. Entender, de forma general, el flujo de datos, desde la visita hasta el análisis.
+5. Ingresar a un proyecto y navegar por sus menús principales.
+
+\vspace{0.5cm}
+
+::: {.callout-note title="Antes de comenzar necesitamos"}
+- El usuario y la contraseña de REDCap.
+- Dispositivo con conexión a internet. 
+- Dirección del servidor REDCap UC: \textcolor{blue}{\href{https://redcap.facultadmedicina.uc.cl}{https://redcap.facultadmedicina.uc.cl}}
+:::
+
+### Los tres módulos de la capacitación
+
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Módulo 1 
+
+**¿Qué es REDCap y cómo funciona?**
+
+Conceptos básicos, organización de un proyecto, calidad y seguridad de los datos.
+
+:::
+
+::: {.column width="32%"}
+
+#### Módulo 2 {.example}
+
+**Recolección de datos**
+
+Crear registros, completar formularios, revisar su estado y solicitar la eliminación de un registro.
+
+:::
+
+::: {.column width="32%"}
+
+#### Módulo 3 {.alert}
+
+**REDCap Mobile App**
+
+Configurar la aplicación en la tablet, recolectar sin conexión y enviar los datos al servidor.
+
+:::
+
+::::
+
+\vspace{0.3cm}
+
+Cada módulo combina una parte expositiva y una práctica sin datos reales: equivocarse es parte del proceso de aprendizaje!
+
+
+
+
+# ¿Qué es REDCap?
+
+### ¿Qué es REDCap?
+
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+**REDCap** (*Research Electronic Data Capture*) es una plataforma web segura para construir y administrar bases de datos y encuestas de investigación.
+
+- Desarrollada por la Vanderbilt University en 2008.
+- Su uso está restringido a instituciones académicas, de gobierno y sin fines de lucro
+- Una instancia debe ser instalada en servidores locales.
+- Funciona desde cualquier navegador o dispositivo (computador, tablet, smartphone).
+- Exporta los datos directamente en formato R, SPSS, Stata, SAS y Excel.
+- En la PUC, hay una instancia administrada por la Facultad de Medicina UC.
+
+:::
+
+::: {.column width="48%"}
+
+
+
+![](m1_login.png){fig-align="center" width="95%"}
+
+
+
+
+:::
+
+::::
+
+### ¿Por qué REDCap?
+
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Seguridad
+
+- Acceso con usuario/contraseña.
+- Cada persona ve y hace solo lo que su rol permite.
+- Los datos quedan en servidores institucionales, con respaldo periódico.
+
+:::
+
+::: {.column width="32%"}
+
+#### Validación de campos {.example}
+
+- Rechaza fechas o números fuera de rango.
+- Muestra solo las preguntas que corresponden a cada participante.
+- Avisa cuando falta un dato obligatorio.
+
+:::
+
+::: {.column width="32%"}
+#### Multiples lenguages {.alert}
+
+- Opciones de programar e implentar instrumentos en multiples lenguages (cambiar en pantalla)
+
+
+:::
+
+::::
+
+\vspace{0.3cm}
+
+
+### ¿Por qué REDCap?
+
+
+
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Proyectos Longitudinales
+
+- Excelente estructura de datos base de datos relacionales. 
+- Basado en indicadores de evento (por ej. múltiples visitas) e identificadores únicos fijos por participante.
+
+:::
+
+
+::: {.column width="32%"}
+
+#### Instrumentos Complejos {.example}
+
+- Opciones para definir lógicas de saltos (ej. por pregunta, por instrumento)
+- Posibilidad de "Formas Repetidas" (ej. un cuidador reportando sobre múltiples niños o niñas)
+
+:::
+
+::: {.column width="32%"}
+
+#### Manejo y estructura de datos {.alert}
+
+- Instrumentos comparten una misma estructura.
+- Permite auditoria en tiempo real desde navegador o mediante API.
+- Datos exportados estan propiamente etiquetados.
+
+
+:::
+
+
+::::
+
+
+
+::: {.callout-tip title="En síntesis..."}
+REDCap reemplaza el papel, planillas excel y otros servicios (por ej. Qualtrics, Google Forms, Kobo) por **una base de datos relacional**, controlada y auditada en una misma plataforma.
+:::
+
+
+
+
+
+
+### REDCap frente al papel, Excel u otros.
+
+
+
+| Aspecto                         | Papel u otros             | REDCap                                     |
+|:--------------------------------|:-----------------------------------|:-------------------------------------------|
+| - Errores de digitación           | Se descubren tiempo después       | Se detectan en el momento del ingreso      |
+| - Preguntas que no corresponden   | Hay que saltarlas a mano           | Se ocultan con lógica de ramificación      |
+| - Quién cambió qué y cuándo       | No queda registro                  | Todo queda en la bitácora (*Logging*)      |
+| - Trabajo de varias personas      | Versiones duplicadas del archivo   | Una sola base, en línea y simultánea       |
+| - Datos identificatorios          | Mezclados con las respuestas       | Marcados y excluibles de las exportación |
+
+: Lo que cambia para el equipo de terreno
+
+::: {.callout-note title="Por qué importa"}
+Cada error que se corrige durante la visita es un error que no hay que rastrear después en la base de datos.
+:::
+
+# Cómo se organiza
+
+### Los componentes de un proyecto
+
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+::: {.bloque}
+#### Proyecto
+La base de datos de un estudio. Agrupa todos sus instrumentos, usuarios y datos.
+:::
+
+\vspace{1cm}
+
+::: {.bloque}
+#### Instrumento (formulario)
+Una página de ingreso de datos, por ejemplo el ESSI o el CES-D.
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.bloque}
+#### Campo (variable)
+Una pregunta o dato dentro de un instrumento, con etiqueta visible y un nombre de variable interno.
+:::
+
+\vspace{1cm}
+
+::: {.bloque}
+#### Registro
+Todos los datos de un mismo participante, repartidos en los distintos instrumentos.
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.bloque}
+#### Record ID
+Identificador único de cada registro que une todos sus formularios.
+:::
+
+\vspace{1cm}
+
+::: {.bloque}
+#### Evento
+Un momento de recolección en un estudio longitudinal, por ejemplo cada ola de visitas.
+:::
+
+:::
+
+::::
+
+
+
+### Un proyecto es una gran tabla
+
+
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}[x=1.12cm,y=0.6cm,font=\scriptsize]
+  % encabezados de instrumento
+  \fill[band1] (1,5) rectangle (4,6);  \node[white,font=\scriptsize\bfseries] at (2.5,5.5) {MAQ};
+  \fill[band2] (4,5) rectangle (7,6);  \node[white,font=\scriptsize\bfseries] at (5.5,5.5) {CES-D};
+  \fill[band3] (7,5) rectangle (9,6);  \node[white,font=\scriptsize\bfseries] at (8,5.5) {ESSI};
+  % nombres de variables
+  \fill[bandcream] (0,4) rectangle (9,5);
+  \foreach \x/\v in {0.5/record\_id,1.5/maq\_01,2.5/maq\_02,3.5/maq\_03,4.5/cesd\_01,5.5/cesd\_02,6.5/cesd\_03,7.5/essi\_01,8.5/essi\_02}
+    \node[text=band1,font=\ttfamily\tiny] at (\x,4.5) {\v};
+  % registros
+  \fill[bandyellow!60] (0,1) rectangle (9,2);
+  \foreach \y/\id/\a/\b/\c/\d/\e/\f/\g/\h in {3.5/001/2/1/3/0/1/0/4/5, 2.5/002/1/1/2/1/0/0/5/5, 1.5/003/3/2/1/0/0/2/3/4, 0.5/004/1/3/2/1/1/1/5/4}{
+    \node[font=\ttfamily\scriptsize\bfseries,text=band1] at (0.5,\y) {\id};
+    \foreach \x/\val in {1.5/\a,2.5/\b,3.5/\c,4.5/\d,5.5/\e,6.5/\f,7.5/\g,8.5/\h}
+      \node[font=\scriptsize] at (\x,\y) {\val};
+  }
+  \foreach \x in {1,...,8} \draw[band2!60] (\x,0) -- (\x,5);
+  \foreach \y in {1,...,4} \draw[band2!60] (0,\y) -- (9,\y);
+  \draw[band1,line width=0.8pt] (0,0) rectangle (9,6);
+  % anotaciones
+  \node[anchor=west,text width=3.1cm,align=left,text=band1,execute at begin node={\hyphenpenalty=10000}] (r) at (9.35,1.5)
+    {\textbf{Registro} = una fila.\\Un/a participante con todas sus respuestas.};
+  \draw[-{Stealth},bandred,thick] (r.west) -- (9.05,1.5);
+  \node[anchor=west,text width=3.1cm,align=left,text=band1,execute at begin node={\hyphenpenalty=10000}] (c) at (9.35,4.5)
+    {\textbf{Campo} = una columna.\\Su nombre de variable es el encabezado al exportar.};
+  \draw[-{Stealth},bandred,thick] (c.west) -- (9.05,4.5);
+  \node[anchor=west,text width=3.1cm,align=left,text=band1,execute at begin node={\hyphenpenalty=10000}] (i) at (9.35,6.4)
+    {\textbf{Instrumento} = un grupo de columnas que se completa en una misma pantalla.};
+  \draw[-{Stealth},bandred,thick] (i.west) -- (9.05,5.7);
+\end{tikzpicture}
+\end{center}
+```
+
+\vspace{0.1cm}
+
+```{=latex}
+\begin{center}\scriptsize\color{band2}Ejemplo ilustrativo: los nombres de variables y los valores no corresponden al proyecto real.\end{center}
+```
+
+### Estudios clásicos y longitudinales
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+#### Proyecto clásico
+
+Cada participante se evalúa **una sola vez**. El registro tiene una lista simple de instrumentos.
+
+*En Linea 1 BAND:* estudio Piloto.
+
+:::
+
+::: {.column width="48%"}
+
+#### Proyecto longitudinal {.example}
+
+Cada participante se evalúa **varias veces**. Los instrumentos se repiten en cada **evento** y el registro muestra una grilla de eventos por instrumentos.
+
+*En Linea 1 BAND:* estudio longitudinal, con cuatro olas de visitas.
+
+:::
+
+::::
+
+\vspace{0.2cm}
+
+::: {.callout-warning title="Atención en proyectos longitudinales"}
+El mismo formulario aparece una vez por ola. Antes de ingresar datos, confirmar siempre que se están ingresando datos **en el evento correcto**.
+:::
+
+### El ciclo de vida de un proyecto
+
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}[font=\small,
+  est/.style={rounded corners=3pt,minimum width=2.3cm,minimum height=0.8cm,text=white,font=\small\bfseries},
+  flecha/.style={-{Stealth},thick,band1}]
+  \node[est,fill=band3] (d) {Desarrollo};
+  \node[est,fill=band1,right=1cm of d] (p) {Producción};
+  \node[est,fill=band2,right=1cm of p] (i) {Inactivo};
+  \node[est,fill=bandlila,right=1cm of i] (a) {Archivado};
+  \node[est,fill=bandorange,below=0.55cm of p,minimum width=2cm,minimum height=0.6cm,font=\scriptsize\bfseries] (b) {Borrador};
+  \draw[flecha] (d) -- (p); \draw[flecha] (p) -- (i); \draw[flecha] (i) -- (a);
+  \draw[flecha,bandorange] (p.south west) to[bend right=25] (b.west);
+  \draw[flecha,bandorange] (b.east) to[bend right=25] (p.south east);
+\end{tikzpicture}
+\end{center}
+```
+
+\vspace{1.2cm}
+
+:::: columns
+
+::: {.column width="48%"}
+
+- **Desarrollo**: se construyen y prueban los instrumentos. Solo datos ficticios. \medskip
+- **Borrador**: cambios de diseño propuestos mientras la recolección continúa. \medskip
+
+
+:::
+
+::: {.column width="48%"}
+- **Producción**: se recolectan los datos reales. Los cambios de diseño se revisan antes de aplicarse.
+- **Inactivo / Archivado**: se cierra el ingreso de datos; los datos se pueden consultar y exportar.
+:::
+
+::::
+
+### Desarrollo y producción en la práctica
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+::: {.callout-tip title="Proyecto de práctica"}
+Está y seguirá en **desarrollo**. Sirve para ensayar sin temor: se pueden crear, modificar y borrar registros ficticios todas las veces que haga falta.
+:::
+
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important title="Proyecto del estudio"}
+Está en **producción**. Cada registro corresponde a una familia real y cada cambio queda auditado. Solo se trabaja en él después de aprobar la capacitación.
+:::
+
+:::
+
+::::
+
+\vspace{0.3cm}
+
+Idealmente ambos proyectos deberían tener los mismos instrumentos, pero **nombres distintos** en la lista *Mis Proyectos*. Antes de crear un registro, revisar siempre el nombre del proyecto en la parte superior de la pantalla.
+
+# Calidad y seguridad
+
+### Lo que verá en un formulario
+
+
+
+| Tipo de campo.           | Cómo se ve                         | Ejemplo en los instrumentos              |
+|:-------------------------|:-----------------------------------|:-----------------------------------------|
+| - Texto con validación   | Casilla que solo acepta un formato | Fecha de nacimiento, edad en meses       |
+| - Opción única (*radio*) | Círculos; se marca uno             | Escalas tipo Likert del CES-D            |
+| - Desplegable (*dropdown*)| Menú con opciones                  | Horas y minutos de uso de pantallas      |
+| - Casillas (*checkbox*)  | Cuadros; se pueden marcar varios   | Dispositivos disponibles en el hogar     |
+| - Matriz                 | Varias preguntas con la misma escala | Bloques de ítems del MAQ o la PBA      |
+| - Calculado / descriptivo | Se completa solo o es solo texto  | Totales, instrucciones para quien evalúa |
+
+: Tipos de campo más comunes en los instrumentos de la Línea 1
+
+### Validación, ramificación y *piping*
+
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Validación
+
+Define qué valores acepta un campo: tipo (fecha, número, texto) y rango mínimo y máximo. Un valor fuera de rango muestra una alerta.
+
+:::
+
+::: {.column width="32%"}
+
+#### Ramificación {.example}
+
+Muestra un campo solo si se cumple una condición.
+
+```
+[engage_vid_short] = '1' 
+```
+
+:::
+
+::: {.column width="32%"}
+
+#### *Piping* {.alert}
+
+Inserta una respuesta anterior en el texto de otra pregunta.
+
+```
+¿[c_name] mira videos
+cortos en el teléfono?
+```
+
+:::
+
+::::
+
+\vspace{1cm}
+
+::: {.callout-important title="Importante"}
+Si una pregunta no aparece en pantalla, **no es un error**: la lógica de ramificación la ocultó porque no corresponde al participante. El equipo debe estar muy seguro sobre la forma en que se deberían desplegar los instrumentos.
+:::
+
+### Roles y derechos de usuario
+
+
+
+| Rol en el proyecto        | Puede                                              | No puede                                  |
+|:--------------------------|:---------------------------------------------------|:------------------------------------------|
+| Evaluador/a de terreno    | Crear registros e ingresar datos en sus formularios | Eliminar registros, exportar datos, cambiar el diseño |
+| Supervisión / coordinación | Revisar formularios, marcar *Completo*, ver reportes y reglas de calidad | Eliminar registros sin solicitud, cambiar el diseño |
+| Gestión de datos          | Diseñar instrumentos, asignar derechos, exportar, renombrar y eliminar registros | Trabajar en producción sin dejar registro del cambio |
+
+: Roles del proyecto BAND
+
+::: {.callout-warning title="Principio de mínimo privilegio"}
+Cada persona recibe solo los permisos que necesita para su tarea. Si un botón no aparece en su pantalla, es porque su rol no lo requiere.
+:::
+
+### Todo queda registrado
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+REDCap guarda una **bitácora** (*Logging*) con cada acción realizada en el proyecto:
+
+- quién creó, modificó o eliminó un registro;
+- qué valor tenía un campo antes y después del cambio;
+- cuándo se exportaron datos y quién lo hizo.
+
+:::
+
+::: {.column width="48%"}
+
+
+![](m1_logging.png){fig-align="center" width="95%"}
+
+
+:::
+
+::::
+
+### Datos que identifican a las familias
+
+
+:::: columns
+
+::: {.column width="50%"}
+
+Algunos campos permiten identificar a una persona: el nombre del niño o la niña (`c_name`), el RUT, la dirección o el teléfono.
+
+- En REDCap se marcan como **identificadores**.
+- Las exportaciones para análisis pueden excluirlos automáticamente.
+- Las fechas pueden desplazarse al exportar, manteniendo los intervalos.
+- El Record ID **nunca** debe contener nombres, RUT ni iniciales.
+
+:::
+
+::: {.column width="46%"}
+
+::: {.callout-tip title="Buena práctica"}
+Registrar los datos de contacto solo donde indica el protocolo, no en campos de texto libre ni en comentarios.
+:::
+
+::: {.callout-warning title="Error frecuente"}
+Escribir el nombre de la familia (u otros identificadores) en un comentario o en una nota. Ese texto queda en la base y aparece en las exportaciones.
+:::
+
+:::
+
+::::
+
+# Los datos en BAND
+
+### El recorrido de los datos
+
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}[
+  paso/.style={execute at begin node={\hyphenpenalty=10000},rounded corners=3pt,minimum width=2.35cm,minimum height=1.25cm,text width=2.15cm,align=center,font=\scriptsize,text=white},
+  fuente/.style={paso,minimum height=1cm,fill=band2!70},
+  flecha/.style={-{Stealth},thick,band1}]
+  \node[paso,fill=band1] (v) {\textbf{Visita}\\en duplas, en el hogar};
+  \node[paso,fill=band2,right=0.45cm of v] (i) {\textbf{Ingreso}\\en REDCap (web o app)};
+  \node[fuente,above=0.3cm of i] (n) {\textbf{NIH Toolbox}\\Baby y V3, app en iPad};
+  \node[fuente,below=0.3cm of i] (c) {\textbf{Chronicle}\\uso del teléfono};
+  \node[paso,fill=band3,right=0.45cm of i] (r) {\textbf{Revisión}\\estado y calidad del formulario REDCap};
+  \node[paso,fill=band4,right=0.45cm of r] (e) {\textbf{Exportación}\\a R vía API};
+  \node[paso,fill=bandlila,right=0.45cm of e] (a) {\textbf{Procesamiento y análisis}};
+  % flujo principal
+  \draw[flecha] (v) -- (i); \draw[flecha] (i) -- (r); \draw[flecha] (r) -- (e); \draw[flecha] (e) -- (a);
+  % ramas: la visita alimenta NIH y Chronicle, que llegan directo al procesamiento
+  \draw[flecha] ([xshift=0.22cm]v.east) |- (n.west);
+  \draw[flecha] ([xshift=0.22cm]v.east) |- (c.west);
+  \draw[flecha] (n.east) -| (a.north);
+  \draw[flecha] (c.east) -| (a.south);
+  % responsables (bajo la caja más baja)
+  \draw[thick,bandred] ([yshift=-0.2cm]v.west |- c.south) -- ([yshift=-0.2cm]i.east |- c.south)
+    node[midway,below=0.1cm,text=bandred,font=\scriptsize\bfseries] {Equipo de terreno};
+  \draw[thick,band2] ([yshift=-0.2cm]r.west |- c.south) -- ([yshift=-0.2cm]r.east |- c.south)
+    node[midway,below=0.1cm,text=band2,font=\scriptsize\bfseries] {Supervisión};
+  \draw[thick,bandlila] ([yshift=-0.2cm]e.west |- c.south) -- ([yshift=-0.2cm]a.east |- c.south)
+    node[midway,below=0.1cm,text=bandlila,font=\scriptsize\bfseries] {Gestión de datos y análisis};
+\end{tikzpicture}
+\end{center}
+```
+
+\vspace{0.3cm}
+
+::: {.callout-warning}
+La calidad de todo el ciclo de datos depende de los primeros dos pasos!!!
+:::
+
+
+### Según el protocolo de la visita
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+#### Evaluador/a 1 - Niño o niña
+
+Aplica las baterías **NIH Toolbox** y **NIH Baby Toolbox** en el iPad. Esos datos se exportan desde la aplicación del NIH, no desde REDCap.
+
+:::
+
+::: {.column width="48%"}
+
+#### Evaluador/a 2 - Cuidador/a {.example}
+
+Aplica los **cuestionarios parentales** e ingresa las respuestas en REDCap, usando el mismo ID de la familia.
+
+:::
+
+::::
+
+\vspace{0.4cm}
+
+::: {.callout-important title="Un mismo ID en todos los sistemas"}
+El ID de la familia une los datos del NIH con los de REDCap. Si el ID no coincide entre los dos sistemas, **los datos de esa familia no se pueden unir**.
+:::
+
+### Moverse por un proyecto
+
+
+:::: columns
+
+::: {.column width="30%"}
+
+
+![](m1_menu.png){fig-align="center" width="75%"}
+
+
+
+:::
+
+::: {.column width="75%"}
+
+En la pantalla principal, el menú de la izquierda reúne todo lo que necesitamos para utilizar el proyecto:
+
+- ***Inicio y Diseño del Proyecto***: información general del proyecto.
+  - Home, Set-up, Diseñador de Formularios, Diccionario de Datos
+- ***Recolección de datos***: 
+  - Consola de registros 
+  - Agregar o editar registros.
+- ***Aplicaciones***: Dashboards, Exportación, Permisos de Usuario, entre otros. 
+- ***Ayuda en Informacion***: Tutoriales en video y ayuda oficial de REDCap.
+
+:::
+
+::::
+
+# Práctica
+
+### Ejercicio 1
+
+
+:::: columns
+
+::: {.column width="60%"}
+
+::: {.callout-caution title="Ejercicio - Explorar el proyecto" icon=false}
+1. Ingresar a REDCap con su usuario y contraseña.
+2. Abrir el proyecto de práctica desde *Instrumentos* (etiqueta confusa!).
+3. Abrir el *Record Status Dashboard* y contar cuántos instrumentos tiene el proyecto.
+4. Abrir el *Codebook* y buscar la variable `c_name`: ¿en qué instrumento está?
+5. Abrir un registro existente y ubicar los íconos **H** y de comentarios.
+:::
+
+:::
+
+::: {.column width="36%"}
+
+::: {.bloque}
+#### Tiempo
+
+15 minutos, en duplas.
+:::
+
+
+\vspace{0.8cm}
+
+
+::: {.bloque}
+
+#### Al terminar {.example}
+
+Cada dupla comparte un campo con validación y uno con lógica de ramificación que haya encontrado.
+
+:::
+
+:::
+
+::::
+
+### Repaso: ¿verdadero o falso?
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+::: {.callout-note title="Afirmación 1" icon=false}
+Si una pregunta no aparece, hay que avisar porque el formulario está incompleto.
+
+<!-- **Falso.** La ramificación la ocultó porque no corresponde. -->
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-note title="Afirmación 2" icon=false}
+En el proyecto de práctica se puede crear y borrar registros sin consecuencias.
+
+<!-- **Verdadero.** Está en desarrollo y solo contiene datos ficticios. -->
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-note title="Afirmación 3" icon=false}
+Se puede usar las iniciales de la familia como Record ID para encontrarla más rápido.
+
+<!-- **Falso.** El ID nunca contiene datos que identifiquen. -->
+:::
+
+:::
+
+::::
+
+### Recursos de apoyo
+
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+
+::: {.bloque}
+#### Dentro de REDCap
+
+- ***Ayuda en Informacion***: preguntas frecuentes oficiales y contacto con administración REDCap.
+- ***Tutoriales en video***: videos breves por tema.
+- Ícono **?** junto a cada función: despliega ayuda contextual.
+
+::: 
+
+\vspace{0.8cm}
+
+::: {.bloque}
+
+#### Materiales públicos {.example}
+
+- Sitio oficial: [projectredcap.org](https://projectredcap.org)
+- Guía para nuevos usuarios (U. de Chile, en español).
+:::
+
+
+:::
+
+::: {.column width="48%"}
+
+#### Contactos del estudio {.alert}
+
+- Dudas sobre el protocolo y la visita: DEFINIR CON EQUIPO.
+- Problemas de acceso o de datos en REDCap: DEFINIR CON EQUIPO.
+- Canal para reportar incidencias: DEFINIR CON EQUIPO.
+
+:::
+
+::::
+
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+
+\Huge
+
+\banddestacado{Preguntas, comentarios y discusión}
+```
+
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+\bandcierre[Contacto - matias.placencio@uc.cl]
+```
 
