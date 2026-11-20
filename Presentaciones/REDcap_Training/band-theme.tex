@@ -1,0 +1,297 @@
+% =====================================================================
+% band-theme.tex
+% Identidad visual Centro BAND para Quarto + beamer (tema metropolis).
+% Paleta y logos tomados de "Plantilla BAND presentaciones.pptx".
+%
+% Uso desde un .qmd:
+%   format:
+%     beamer:
+%       theme: metropolis
+%       include-in-header:
+%         - file: band-theme.tex
+%
+% Requiere la carpeta images/ (logos y fondos) junto al .qmd.
+% =====================================================================
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\graphicspath{{images/}}
+
+% ---------------------------------------------------------------------
+% 1. Paleta BAND (colores del tema del .pptx)
+% ---------------------------------------------------------------------
+\definecolor{band1}{HTML}{007A8C}      % petróleo (color principal)
+\definecolor{band2}{HTML}{239C9F}      % verde azulado
+\definecolor{band3}{HTML}{00C2BB}      % turquesa
+\definecolor{band4}{HTML}{00CC99}      % verde
+\definecolor{bandred}{HTML}{E6605B}    % coral
+\definecolor{bandorange}{HTML}{F26B43} % naranja
+\definecolor{bandyellow}{HTML}{D7F49A} % lima
+\definecolor{bandlila}{HTML}{8F94F7}   % lila
+\definecolor{bandblue}{HTML}{3700EF}   % azul eléctrico
+\definecolor{bandpink}{HTML}{F8D3F3}   % rosado
+\definecolor{bandcream}{HTML}{EEECE3}  % crema (fondo del .pptx)
+\definecolor{bandink}{HTML}{0E2841}    % azul noche (texto)
+
+% ---------------------------------------------------------------------
+% 2. Colores y fuentes de beamer / metropolis
+% ---------------------------------------------------------------------
+\setbeamercolor{normal text}{fg=bandink,bg=white}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{structure}{fg=band1}
+
+% Título de lámina: texto petróleo sobre franja crema.
+% (Para la franja sólida del template anterior: fg=white,bg=band1)
+\setbeamercolor{frametitle}{fg=band1,bg=bandcream}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+
+% Barra de progreso de metropolis
+\setbeamercolor{progress bar}{fg=band3,bg=band3!25}
+\makeatletter
+\setlength{\metropolis@progressinheadfoot@linewidth}{1.2pt}
+\makeatother
+
+% Énfasis y listas
+\setbeamercolor{alerted text}{fg=bandred}
+\setbeamercolor{example text}{fg=band2}
+\setbeamercolor{itemize item}{fg=band2}
+\setbeamercolor{itemize subitem}{fg=band3}
+\setbeamercolor{enumerate item}{fg=band1}
+\setbeamercolor{enumerate subitem}{fg=band2}
+\setbeamerfont{enumerate item}{series=\bfseries}
+\setbeamercovered{transparent=20}
+\setbeamertemplate{frametitle continuation}{}
+\hypersetup{colorlinks=true,allcolors=band1}
+
+% Bloques (encabezados #### dentro de una lámina)
+%   #### Título            -> petróleo
+%   #### Título {.example} -> verde azulado
+%   #### Título {.alert}   -> coral
+\setbeamercolor{block title}{bg=band1,fg=white}
+\setbeamercolor{block body}{bg=band1!8,fg=bandink}
+\setbeamercolor{block title example}{bg=band2,fg=white}
+\setbeamercolor{block body example}{bg=band2!10,fg=bandink}
+\setbeamercolor{block title alerted}{bg=bandred,fg=white}
+\setbeamercolor{block body alerted}{bg=bandred!10,fg=bandink}
+\setbeamerfont{block title}{series=\bfseries,size=\normalsize}
+\setbeamerfont{block title example}{series=\bfseries,size=\normalsize}
+\setbeamerfont{block title alerted}{series=\bfseries,size=\normalsize}
+
+% Código un poco más pequeño para que quepa en columnas
+\AtBeginEnvironment{Shaded}{\small}
+\AtBeginEnvironment{verbatim}{\small}
+
+% ---------------------------------------------------------------------
+% 3. Callouts de Quarto con la paleta BAND
+%    note      -> petróleo  (conceptos, definiciones)
+%    tip       -> verde     (buenas prácticas)
+%    warning   -> naranja   (errores frecuentes)
+%    important -> coral     (reglas que no se rompen)
+%    caution   -> azul      (ejercicios; usar title="Ejercicio")
+% ---------------------------------------------------------------------
+\makeatletter
+\AtBeginDocument{%
+  \definecolor{quarto-callout-note-color}{HTML}{007A8C}%
+  \definecolor{quarto-callout-note-color-frame}{HTML}{007A8C}%
+  \definecolor{quarto-callout-tip-color}{HTML}{00CC99}%
+  \definecolor{quarto-callout-tip-color-frame}{HTML}{00CC99}%
+  \definecolor{quarto-callout-warning-color}{HTML}{F26B43}%
+  \definecolor{quarto-callout-warning-color-frame}{HTML}{F26B43}%
+  \definecolor{quarto-callout-important-color}{HTML}{E6605B}%
+  \definecolor{quarto-callout-important-color-frame}{HTML}{E6605B}%
+  \definecolor{quarto-callout-caution-color}{HTML}{3700EF}%
+  \definecolor{quarto-callout-caution-color-frame}{HTML}{3700EF}%
+  % Texto de los callouts alineado a la izquierda (sin justificar)
+  \@ifpackageloaded{tcolorbox}{\tcbset{halign=flush left}}{}%
+}
+\makeatother
+
+% ---------------------------------------------------------------------
+% 4. Pie de página: isotipo + título corto | sección | n / N + logo
+%    Cambiar el título corto desde el .qmd con:
+%      \renewcommand{\bandshorttitle}{Mi título corto}
+% ---------------------------------------------------------------------
+\newcommand{\bandshorttitle}{\insertshorttitle}
+\newlength{\bandfootmargin}
+\setlength{\bandfootmargin}{0.2cm}   % espacio a cada lado del pie de página
+
+\setbeamertemplate{footline}{%
+	\ifnum\value{page}>1\relax
+	\begin{beamercolorbox}[wd=\paperwidth,ht=0.52cm,dp=0.22cm]{footline}%
+		\hspace*{\bandfootmargin}%
+		\makebox[\dimexpr0.37\paperwidth-\bandfootmargin\relax][l]{%
+			%        \raisebox{-0.13cm}{\includegraphics[height=0.42cm]{band_isotipo.png}}\hspace{0.2cm}%
+			{\scriptsize\textcolor{band1}{\bandshorttitle}}}%
+		\makebox[0.26\paperwidth][c]{\scriptsize\textcolor{band2}{\insertsection}}%
+		\makebox[\dimexpr0.37\paperwidth-\bandfootmargin\relax][r]{%
+			{\scriptsize\textcolor{band1}{\insertframenumber\,/\,\inserttotalframenumber}}%
+			\hspace{0.3cm}%
+			\raisebox{-0.09cm}{\includegraphics[height=0.36cm]{band_logo.png}}}%
+	\end{beamercolorbox}%
+	\fi
+}
+% ---------------------------------------------------------------------
+% 5. Fondos especiales: portada, portadilla de sección, destacado, cierre
+%    El fondo se elige con una marca que cada lámina activa desde su
+%    contenido y que se borra al comenzar la lámina siguiente.
+% ---------------------------------------------------------------------
+\makeatletter
+\newcommand{\band@bg}{}
+\newcommand{\band@bgcolor}{band1}
+\newcommand{\band@closingtext}{}
+\AtBeginEnvironment{frame}{\gdef\band@bg{}}
+
+% Lienzo del tamaño de la lámina; coordenadas de (0,0) a (1,1)
+\newcommand{\band@canvas}[1]{%
+  \begin{tikzpicture}[x=\paperwidth,y=\paperheight,inner sep=0pt,outer sep=0pt]
+    \useasboundingbox (0,0) rectangle (1,1);
+    #1
+  \end{tikzpicture}}
+
+% --- Portada (siempre la página 1) ---
+\newcommand{\band@drawportada}{\band@canvas{%
+  \node[anchor=south west] at (0,0)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{band_fondo_portada.png}};
+  \node[anchor=north west] at (0.035,0.945)
+    {\includegraphics[height=1.5cm]{band_logo_bajada_blanco.png}};
+  \node[anchor=north east,text=white,font=\scriptsize] at (0.965,0.925) {\insertdate};
+  \node[anchor=west,text=white,text width=0.40\paperwidth,align=flush left] at (0.56,0.5) {%
+    {\LARGE\bfseries\inserttitle\par}%
+    \ifx\insertsubtitle\@empty\else\vspace{0.25cm}{\large\insertsubtitle\par}\fi
+    \vspace{0.3cm}{\color{bandyellow}\rule{1.2cm}{1.5pt}\par}\vspace{0.3cm}%
+    {\small\insertauthor\par}%
+    \ifx\insertinstitute\@empty\else\vspace{0.08cm}{\scriptsize\insertinstitute\par}\fi};
+  \node[anchor=south west] at (0.035,0.06)
+    {\includegraphics[height=0.75cm]{band_isotipo_claro.png}};
+  \node[anchor=south east] at (0.965,0.075)
+    {\includegraphics[height=0.3cm]{band_web_blanco.png}};
+}}
+
+% --- Portadilla de sección ---
+\newcommand{\band@drawseccion}{\band@canvas{%
+  \node[anchor=south west] at (0,0)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{band_fondo_crema.png}};
+  \node[anchor=north west] at (0.035,0.945)
+    {\includegraphics[height=0.8cm]{band_logo.png}};
+  \node[anchor=west,text width=0.40\paperwidth,align=flush left] at (0.56,0.5) {%
+    {\fontsize{30}{32}\selectfont\bfseries\color{band3}%
+      \ifnum\value{section}<10 0\fi\arabic{section}\par}%
+    \vspace{0.2cm}{\color{bandred}\rule{1.2cm}{1.5pt}\par}\vspace{0.3cm}%
+    {\LARGE\bfseries\color{band1}\insertsection\par}};
+  \node[anchor=south west] at (0.035,0.06)
+    {\includegraphics[height=0.75cm]{band_isotipo.png}};
+  \node[anchor=south east] at (0.965,0.075)
+    {\includegraphics[height=0.3cm]{band_web.png}};
+}}
+
+% --- Portadilla de subsección ---
+% Color de fondo: cambiar aquí (tonos claros: bandpink, bandyellow, bandcream)
+%\newcommand{\bandsubseccioncolor}{band4}
+%\newcommand{\band@drawsubseccion}{\band@canvas{%
+%		\fill[color=\bandsubseccioncolor] (0,0) rectangle (1,1);
+%		\node[anchor=north west] at (0.035,0.945)
+%		{\includegraphics[height=0.8cm]{band_logo.png}};
+%		\node[anchor=west,text width=0.40\paperwidth,align=flush left] at (0.56,0.5) {%
+%			{\small\bfseries\color{band1}%
+%				\ifnum\value{section}<10 0\fi\arabic{section}\hspace{0.6em}\insertsection\par}%
+%			\vspace{0.2cm}{\color{bandred}\rule{1.2cm}{1.5pt}\par}\vspace{0.3cm}%
+%			{\Large\bfseries\color{band1}\insertsubsection\par}};
+%		\node[anchor=south west] at (0.035,0.06)
+%		{\includegraphics[height=0.75cm]{band_isotipo.png}};
+%		\node[anchor=south east] at (0.965,0.075)
+%		{\includegraphics[height=0.3cm]{band_web.png}};
+%}}
+
+
+% --- Portadilla de subsección (fondo verde con la "B") ---
+\newcommand{\band@drawsubseccion}{\band@canvas{%
+		\node[anchor=south west] at (0,0)
+		{\includegraphics[width=\paperwidth,height=\paperheight]{band_fondo_verde.png}};
+		\node[anchor=north west] at (0.035,0.945)
+		{\includegraphics[height=0.8cm]{band_logo_petroleo.png}};
+		  \node[anchor=west,text width=0.40\paperwidth,align=flush left] at (0.56,0.5) {%
+			{\small\bfseries\color{band1}%
+				\ifnum\value{section}<10 0\fi\arabic{section}\hspace{0.6em}\insertsection\par}%
+			\vspace{0.2cm}{\color{bandred}\rule{1.2cm}{1.5pt}\par}\vspace{0.3cm}%
+			{\Large\bfseries\color{band1}\insertsubsection\par}};
+		\node[anchor=south west] at (0.035,0.06)
+		{\includegraphics[height=0.75cm]{band_isotipo.png}};
+		\node[anchor=south east] at (0.965,0.075)
+		{\includegraphics[height=0.3cm]{band_web.png}};
+}}
+
+
+
+% --- Lámina destacada a color completo ---
+\newcommand{\band@drawcolor}{\band@canvas{%
+  \fill[color=\band@bgcolor] (0,0) rectangle (1,1);
+  \node[anchor=south west] at (0.035,0.06)
+    {\includegraphics[height=0.75cm]{band_isotipo_claro.png}};
+  \node[anchor=south east] at (0.965,0.075)
+    {\includegraphics[height=0.3cm]{band_web_blanco.png}};
+}}
+
+% --- Cierre ---
+\newcommand{\band@drawcierre}{\band@canvas{%
+  \fill[color=bandcream] (0,0) rectangle (1,1);
+  \node at (0.5,0.60) {\includegraphics[height=2.6cm]{band_logo_bajada.png}};
+  \node at (0.5,0.34) {\includegraphics[height=0.42cm]{band_web.png}};
+  \node[text=band1,font=\small,align=center] at (0.5,0.20) {\band@closingtext};
+}}
+
+\setbeamertemplate{background}{%
+  \ifnum\value{page}=1\relax
+    \band@drawportada
+  \else
+    \ifdefstring{\band@bg}{seccion}{\band@drawseccion}{%
+	\ifdefstring{\band@bg}{subseccion}{\band@drawsubseccion}{%
+		\ifdefstring{\band@bg}{color}{\band@drawcolor}{%
+			\ifdefstring{\band@bg}{cierre}{\band@drawcierre}{}}}}%
+  \fi
+}
+
+% La portada se dibuja completa en el fondo (título, autor, fecha, logos)
+\setbeamertemplate{title page}{\mbox{}}
+
+% Comandos para usar dentro de una lámina {.plain .noframenumbering}
+%   \bandseccion                    portadilla de sección (automática con #)
+%   \banddestacado[color]{Texto}    mensaje clave; color: band1 (defecto),
+%                                   band2, bandred, bandblue, bandlila
+%   \bandcierre[Texto de contacto]  lámina final con logo
+\newcommand{\bandseccion}{\gdef\band@bg{seccion}\mbox{}}
+\newcommand{\bandsubseccion}{\gdef\band@bg{subseccion}\mbox{}}
+\newcommand{\banddestacado}[2][band1]{%
+  \gdef\band@bg{color}\gdef\band@bgcolor{#1}%
+  \begin{center}\color{white}\LARGE\bfseries #2\par\end{center}}
+\newcommand{\bandcierre}[1][]{%
+  \gdef\band@bg{cierre}\gdef\band@closingtext{#1}\mbox{}}
+\makeatother
+
+% Portadilla automática al inicio de cada sección (#)
+\AtBeginSection[]{%
+  \begin{frame}[plain,noframenumbering]
+    \bandseccion
+  \end{frame}}
+\AtBeginSubsection[]{%
+	\begin{frame}[plain,noframenumbering]
+		\bandsubseccion
+\end{frame}}
+
+% ---------------------------------------------------------------------
+% 6. Marcador de posición para capturas de pantalla
+%    \bandcaptura{Texto}  o  \bandcaptura[0.7]{Texto}  (alto/ancho)
+% ---------------------------------------------------------------------
+\newcommand{\bandcaptura}[2][0.6]{%
+  \begin{center}
+  \begin{tikzpicture}
+    \node[draw=band2,dashed,line width=0.6pt,rounded corners=3pt,fill=bandcream,
+          minimum width=0.96\linewidth,minimum height=#1\linewidth,
+          text width=0.8\linewidth,align=center,text=band1,font=\small,
+          inner sep=0pt] {#2};
+  \end{tikzpicture}
+  \end{center}}
