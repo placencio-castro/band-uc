@@ -1,0 +1,805 @@
+---
+title: "Capacitación en REDCap"
+subtitle: "Módulo 2 - Recolección de datos y gestión de registros"
+author: "Matías Placencio-Castro, PhD"
+institute: "Consultor Arquitectura, Procesamiento y Análisis de Datos \\ Centro BAND Linea 1"
+date: today
+date-format: long
+lang: es
+format:
+  beamer:
+    theme: metropolis
+    themeoptions:
+      - progressbar=frametitle
+      - sectionpage=none
+      - subsectionpage=none
+      - block=fill
+    aspectratio: 169
+    fontsize: 9pt
+    classoption: handout
+    toc: true
+    slide-level: 3
+    pdf-engine: lualatex
+    include-in-header:
+      - file: band-theme.tex
+      - text: |
+          \renewcommand{\bandshorttitle}{Capacitación REDCap - Módulo 2}
+execute:
+  echo: false
+---
+
+# Introducción
+
+### Objetivos de la sesión
+
+<!-- LAYOUT: 1 columna + callout -->
+
+Al finalizar este módulo, los participantes podrán:
+
+1. Crear un registro nuevo con los IDs asignados.
+2. Encontrar y abrir un registro existente.
+3. Completar, guardar y revisar los instrumentos de una visita.
+4. Corregir un dato y dejar constancia del motivo.
+5. Distinguir cuándo corresponde eliminar datos y cómo solicitarlo.
+
+
+
+### Antes de la visita
+
+<!-- LAYOUT: 2 columnas (lista + callouts apilados) -->
+
+:::: columns
+
+::: {.column width="50%"}
+
+- Confirmar el **ID de la familia y los participantes** en el listado entregado por la coordinación.
+- Verificar que el usuario de REDCap funciona y que el proyecto aparece en *Mis Instrumentos*.
+- Cargar el computador o la tablet y desactivar las notificaciones.
+- Comprobar si habrá internet en el hogar. Si no lo habrá, asumir que en la visita se utilizará REDCap Mobile App (Ver Módulo 3).
+<!-- - Revisar qué instrumentos corresponden a la edad del niño o la niña. -->
+
+:::
+
+::: {.column width="46%"}
+
+::: {.callout-tip title="Buena práctica"}
+Anotar los IDs correspondientes en la hoja de registro de la sesión antes de salir. Así se puede comparar con lo que se ingresa en REDCap.
+:::
+
+<!-- ::: {.callout-warning title="Error frecuente"} -->
+<!-- Abrir el proyecto de práctica en lugar del proyecto del estudio. Revisar el nombre en la parte superior de la pantalla. -->
+<!-- ::: -->
+
+:::
+
+::::
+
+# Crear registros
+
+### El Record ID: la llave del estudio
+
+<!-- LAYOUT: 2 columnas (texto + callout) -->
+
+:::: columns
+
+::: {.column width="50%"}
+
+Cada registro se identifica con un **Record ID** único.
+
+- Es el primer campo del primer formulario.
+- Une todos los instrumentos y eventos de una misma familia.
+- Es el mismo ID que se usa en la aplicación del NIH y en la hoja de registro de la sesión.
+- Una vez creado, solo el equipo de gestión de datos puede cambiarlo.
+
+:::
+
+::: {.column width="46%"}
+
+::: {.callout-important title="Reglas que no se rompen"}
+- Usar **solo** el ID asignado por la coordinación.
+- Nunca inventar un ID ni crear uno "provisorio".
+- Nunca incluir nombres, RUT ni iniciales en el ID.
+- Revisar el ID dos veces antes de crear el registro.
+:::
+
+:::
+
+::::
+
+### Crear un registro en tres pasos
+
+<!-- LAYOUT: 3 columnas con bloques de color -->
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### 1. Abrir *Add / Edit Records*
+
+En el menú de la izquierda, sección *Data Collection*, hacer clic en ***Add / Edit Records***.
+
+:::
+
+::: {.column width="32%"}
+
+#### 2. Ingresar el ID {.example}
+
+Escribir el ID de la familia en la casilla ***Enter a new or existing Record ID*** y presionar *Enter*.
+
+:::
+
+::: {.column width="32%"}
+
+#### 3. Confirmar {.alert}
+
+REDCap avisa que el registro **no existe** y pregunta si se desea crear. Confirmar solo si el ID es correcto.
+
+:::
+
+::::
+
+<!-- \vspace{0.3cm} -->
+
+<!-- ::: {.callout-note title="Si el proyecto numera automáticamente"} -->
+<!-- En lugar de la casilla aparece el botón ***Add new record***, y REDCap asigna el siguiente número disponible. En ese caso, el ID de la familia se registra en el campo que indique el protocolo. -->
+<!-- ::: -->
+
+### La página *Agregar o editar registros*
+
+
+
+:::: columns
+
+::: {.column width="56%"}
+
+
+![](m2_add_edit_records.png){fig-align="center" width="95%"}
+
+
+:::
+
+::: {.column width="40%"}
+
+En esta página se puede:
+
+- **crear** un registro nuevo escribiendo un ID que no existe;
+- **abrir** un registro existente desde la lista desplegable ***Elegir un registro existente***;
+- **buscar** un registro por el valor de otro campo con ***Buscar datos***.
+
+\vspace{0.5cm
+}
+::: {.callout-warning}
+Si REDCap dice que el ID **ya existe**, no crear otro: avisar a la coordinación, porque puede tratarse de un duplicado.
+:::
+
+:::
+
+::::
+
+
+### La página inicial de registro
+
+
+:::: columns
+
+::: {.column width="40%"}
+
+Al crear o abrir un registro aparece la ***Página inicial del registro***:
+
+- una fila por instrumento (y una columna por evento en el estudio longitudinal);
+- un círculo de color que indica el **estado** de cada formulario;
+- el menú ***Seleccionar la acción para el registro*** con acciones sobre el registro completo.
+
+Desde aquí se abre cualquier formulario con un clic en su círculo.
+
+:::
+
+::: {.column width="56%"}
+
+
+![](m2_record_home.png){fig-align="center" width="95%"}
+
+
+:::
+
+::::
+
+### Tres formas de encontrar un registro
+
+
+:::: columns
+
+::: {.column width="32%"}
+
+::: {.callout-note title="Por su ID" icon=false}
+En *Agregar o editar registros*, elegir el ID en la lista **Elegir un registro existente***. Es la forma más rápida y segura.
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-note title="Por otro dato" icon=false}
+Con ***Data Search***, elegir un campo y escribir un valor. Los resultados aparecen mientras se escribe.
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-note title="En el tablero" icon=false}
+En el ***Record Status Dashboard***, hacer clic en el ID o en el círculo del formulario que se quiere abrir.
+:::
+
+:::
+
+::::
+
+\vspace{0.3cm}
+
+
+::: {.callout-warning title="En el tablero" icon=false}
+Antes de ingresar datos, confirmar que el ID que aparece en la parte superior del formulario es el de la familia que se está evaluando.
+:::
+
+# Ingresar datos
+
+### Una visita en tres pasos
+
+<!-- LAYOUT: 3 columnas con bloques de color -->
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### 1. Abrir el registro
+
+Crear el registro con el ID asignado o abrirlo si ya existe. En el estudio longitudinal, ubicar la **columna de la ola** que corresponde.
+
+:::
+
+::: {.column width="32%"}
+
+#### 2. Completar {.example}
+
+Ingresar las respuestas instrumento por instrumento (el orden seguirá lo definido en el protocolo) y guardar cada formulario antes de pasar al siguiente.
+
+:::
+
+::: {.column width="32%"}
+
+#### 3. Guardar y revisar {.alert}
+
+Antes de salir del hogar, revisar en la *Página inicial de registro* que todos los formularios de la visita tengan el estado esperado (\textcolor[RGB]{20,126,18}{\textbf{Completo}}).
+
+:::
+
+::::
+
+<!-- \vspace{1cm} -->
+
+<!-- Los cuestionarios parentales los ingresa el **Evaluador/a 2** mientras su dupla aplica las pruebas del NIH al niño o la niña. -->
+
+### Completar un formulario
+
+<!-- LAYOUT: 2 columnas (texto + callouts apilados) -->
+
+:::: columns
+
+::: {.column width="50%"}
+
+**Tipo de campos:** \bigskip
+
+- **Opción única** (*radio*): se marca un círculo. Para borrar la respuesta, usar el enlace ***reset*** a la derecha.
+- **Casillas** (*checkbox*): se pueden marcar varias opciones.
+- **Fechas**: escribir en el formato indicado o usar el calendario; el botón ***Today*** pone la fecha del día.
+- **Listas desplegables**: se puede escribir para filtrar las opciones.
+- **Matrices**: varias preguntas con la misma escala, una por fila.
+
+:::
+
+::: {.column width="46%"}
+
+::: {.callout-tip title="Buena práctica"}
+Leer cada pregunta tal como está escrita. Si aparece el nombre del niño o la niña en el enunciado, es *piping*.
+:::
+
+::: {.callout-warning title="Error frecuente"}
+Dejar una pregunta de opción única marcada por accidente. No se puede desmarcar con otro clic: hay que presionar ***Restablecer el valor*** para borrar la respuesta.
+:::
+
+:::
+
+::::
+
+### Guardar el formulario
+
+<!-- LAYOUT: 1 columna con tabla + callout -->
+
+| Botón                       | Qué hace                                                   |
+|:----------------------------|:-----------------------------------------------------------|
+| ***Guardar y salir***      | Guarda y vuelve a la página de inicio del registro          |
+| ***Guardar y continuar***           | Guarda y se queda en el mismo formulario                    |
+| ***Guardar e ir al siguiente formulario*** | Guarda y abre el siguiente instrumento del mismo registro  |
+| ***Guardar y salir del registro***    | Guarda y sale del registro                                  |
+| ***Cancelar***                | Sale **sin guardar** los cambios                            |
+
+: Botones al final de cada formulario
+
+::: {.callout-important title="Importante"}
+Pasar a otro formulario haciendo clic en su círculo, en el menú lateral, **no guarda** lo ingresado. Guardar siempre con un botón *Save* antes de moverse.
+:::
+
+
+
+
+### Estado de cada formulario
+
+<!-- LAYOUT: 3 columnas con callouts -->
+
+Al final de cada formulario, en ***Complete?***, se elige uno de estos estados antes de guardar:
+
+:::: columns
+
+::: {.column width="32%"}
+
+::: {.callout-important title="Incompleto - rojo" icon=false}
+Faltan respuestas o la aplicación se interrumpió. Es el estado por defecto. Registrar el motivo en la hoja de incidencias.
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-warning title="No verificado - amarillo" icon=false}
+Se ingresaron todos los datos, pero falta la revisión de supervisión. **Es el estado con que el evaluador/a cierra el formulario.**
+:::
+
+:::
+
+::: {.column width="32%"}
+
+::: {.callout-tip title="Completo - verde" icon=false}
+Datos ingresados y revisados por supervisión. El formulario queda listo para procesamiento y análisis.
+:::
+
+:::
+
+::::
+
+\vspace{0.4cm}
+
+Un círculo **gris** indica que el formulario todavía no tiene datos guardados.
+
+
+### **Consola de estado de registros**
+
+
+
+:::: columns
+
+::: {.column width="56%"}
+
+
+![](m2_dashboard.png){fig-align="center" width="95%"}
+
+
+
+
+:::
+
+::: {.column width="40%"}
+
+**Muestra todos los registros (filas) y el estado de cada formulario (columnas).** \bigskip
+
+- Sirve para revisar de un vistazo qué falta.
+- Un clic en un círculo abre ese formulario.
+- Cada persona ve solo los formularios a los que tiene acceso.
+
+\bigskip
+
+Al final de la jornada, revisar aquí que las visitas del día no tengan formularios en rojo sin una explicación registrada.
+
+:::
+
+::::
+
+### Alertas de ingreso de datos
+
+\centering
+
+**El sistema muestra alertas cuando los campos no cumplen con las reglas de validación definidas**
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Valor fuera de rango
+
+El número o la fecha está fuera de los límites esperados. Volver a preguntar o revisar lo anotado antes de aceptar el valor.
+
+:::
+
+::: {.column width="32%"}
+
+#### Formato incorrecto {.example}
+
+El valor no corresponde al tipo de campo, por ejemplo una fecha mal escrita. REDCap no lo guarda hasta corregirlo.
+
+:::
+
+::: {.column width="32%"}
+
+#### Campo obligatorio vacío {.alert}
+
+Al guardar, REDCap lista los campos obligatorios sin respuesta. Completarlos o dejar constancia de por qué faltan.
+
+:::
+
+::::
+
+\vspace{0.4cm}
+
+::: {.callout-note title="Por qué importa"}
+Las alertas detienen el error en el momento del ingreso, cuando todavía es posible confirmar el dato con la persona entrevistada.
+:::
+
+
+
+### Corregir un dato ya guardado
+
+
+
+:::: columns
+
+::: {.column width="45%"}
+
+**De ser necesario, se puede corregir información recolectada.** \bigskip
+
+1. Abrir el formulario desde la *Página inicial de registro*.
+2. Cambiar el valor del campo.
+3. Hacer clic en el **globo de diálogo** junto al campo y escribir el motivo del cambio.
+4. Guardar el formulario.
+
+Cada cambio queda en la bitácora con el valor anterior, el nuevo, la persona y la fecha. El ícono **H** muestra ese historial.
+
+:::
+
+::: {.column width="50%"}
+![](m2_comment_log.png){fig-align="center" width="65%"} \medskip
+![](m2_comment_log2.png){fig-align="center" width="65%"}
+:::
+
+::::
+
+### Reglas de ingreso
+
+
+:::: columns
+
+::: {.column width="50%"}
+
+- Usar siempre el ID asignado; nunca crear un ID propio.
+- Ingresar los datos **durante la visita**.
+- No dejar campos obligatorios en blanco sin registrar el motivo.
+- Guardar antes de cambiar de instrumento.
+- En el estudio longitudinal, confirmar la ola antes de ingresar.
+- Cerrar sesión al terminar, sobre todo en equipos compartidos.
+
+:::
+
+::: {.column width="46%"}
+
+::: {.callout-tip title="Buena práctica"}
+Al cerrar la visita, abrir la *Página inicial de registro* y revisar con la dupla que todos los formularios estén en amarillo o tengan una incidencia registrada.
+:::
+
+::: {.callout-warning title="Error frecuente"}
+Escribir datos de contacto o comentarios sobre la familia en campos de texto libre. Esa información queda en la base de datos.
+:::
+
+:::
+
+::::
+
+# Eliminar registros
+
+### En terreno no se elimina: se reporta
+
+
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}
+  \node[fill=bandred,text=white,rounded corners=4pt,inner xsep=14pt,inner ysep=8pt,font=\Large\bfseries,align=center]
+    {Eliminar datos es una acción permanente.\\[2pt]\normalsize Solo la realiza el equipo de gestión de datos.};
+\end{tikzpicture}
+\end{center}
+```
+
+\vspace{0.5cm}
+
+:::: columns
+
+::: {.column width="48%"}
+
+::: {.callout-important}
+Los protocolos de recolección de datos establecen que eliminar evaluaciones es tarea exclusiva del equipo de investigación. Por eso, el perfil REDCap del evaluador/a **no debe tener** permisos para *Borrar Registros*.
+::: 
+
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-warning}
+Si un registro o un formulario tiene un error que no se puede corregir editando, se **reporta** con una solicitud. El equipo de gestión de datos revisa el caso, lo resuelve y documenta la decisión.
+:::
+
+:::
+
+::::
+
+### ¿Qué hacer ante cada situación?
+
+
+
+| Situación                                         | Qué hace el evaluador/a                         | Quién lo resuelve |
+|:--------------------------------------------------|:------------------------------------------------|:------------------|
+| Una respuesta quedó mal marcada                   | Corregirla y dejar un comentario en el campo     | Evaluador/a       |
+| Un formulario se llenó en el participante equivocado  | No tocarlo y enviar una solicitud                | Gestión de datos  |
+| El registro se creó con un ID incorrecto          | No crear otro y enviar una solicitud             | Gestión de datos  |
+| Hay dos registros para la misma familia           | No ingresar más datos en ninguno y enviar una solicitud | Gestión de datos |
+| La familia se retira del estudio                  | Registrar el retiro según el protocolo; **no** borrar | Investigadoras responsables |
+
+: Situaciones frecuentes y responsables sugeridos
+
+
+
+
+### Tres niveles de borrado
+
+:::: columns
+
+::: {.column width="32%"}
+
+#### Una respuesta
+
+**Quién:** evaluador/a.
+
+Cambiar el valor o usar ***restablecer*** en una pregunta de opción única. Guardar y dejar un comentario.
+
+El cambio queda en la bitácora.
+
+:::
+
+::: {.column width="32%"}
+
+#### Un formulario {.example}
+
+**Quién:** gestión de datos.
+
+Botón ***Eliminar datos solamente para este formulario*** al final del formulario.
+
+Borra todas las respuestas de ese formulario, solo para ese registro.
+
+:::
+
+::: {.column width="32%"}
+
+#### El registro completo {.alert}
+
+**Quién:** gestión de datos.
+
+Menú ***Seleccionar la acción para el registro*** → ***Delete record (all forms)***.
+
+Borra todos los formularios y eventos de ese registro.
+
+:::
+
+::::
+
+\vspace{0.2cm}
+
+::: {.callout-important title="No se puede deshacer"}
+REDCap pide confirmar y advierte que la eliminación es **permanente**. Los datos borrados no se recuperan desde la interfaz.
+:::
+
+### Cómo se elimina un registro (gestión de datos)
+
+
+:::: columns
+
+::: {.column width="48%"}
+
+1. Revisar la solicitud y confirmar el ID, el formulario y el motivo.
+2. Si hay datos válidos, exportarlos o moverlos antes de borrar.
+3. Abrir la *Record Home Page* del registro.
+4. En ***Seleccionar la acción para el registro***, elegir ***Delete record (all forms)***.
+5. Leer la advertencia y confirmar.
+6. Registrar la eliminación en el registro de solicitudes.
+
+
+:::
+
+::: {.column width="48%"}
+
+
+![](m2_delete_record.png){fig-align="center" width="95%"}
+
+
+:::
+
+::::
+
+### Renombrar un registro
+
+:::: columns
+
+::: {.column width="50%"}
+
+Cuando el único error es el **ID**, no hace falta borrar: se puede **renombrar** el registro y conservar todos sus datos.
+
+- Menú ***Seleccionar la acción para el registro*** → ***Cambiar el nombre del registro***.
+- Requiere el permiso *Renombrar registros*, reservado a gestión de datos. El nuevo ID no puede coincidir con uno que ya existe.
+
+
+::: {.callout-tip title="Primera opción"}
+Ante un ID mal escrito, renombrar es preferible a eliminar y volver a ingresar: no se pierden datos ni la historia del registro.
+:::
+
+
+:::
+
+::: {.column width="46%"}
+
+![](m2_rename_record.png){fig-align="center" width="75%"}
+
+\vspace{0.5cm}
+
+::: {.callout-warning title="Revisar también"}
+Si el ID estaba mal en REDCap, comprobar si también está mal en la aplicación del NIH.
+:::
+
+:::
+
+::::
+
+### La solicitud de eliminación
+
+<!-- LAYOUT: diagrama TikZ + callout -->
+
+```{=latex}
+\begin{center}
+\begin{tikzpicture}[
+  paso/.style={execute at begin node={\hyphenpenalty=10000},rounded corners=3pt,minimum width=2.9cm,minimum height=1.3cm,text width=2.7cm,align=center,font=\normalsize,text=white},
+  flecha/.style={-{Stealth},thick,band1}]
+  \node[paso,fill=band1] (a) {\textbf{1. Detectar}\\Evaluador/a o supervisión identifica el problema};
+  \node[paso,fill=band2,right=0.5cm of a] (b) {\textbf{2. Reportar}\\ID, formulario, evento, motivo y fecha};
+  \node[paso,fill=band3,right=0.5cm of b] (c) {\textbf{3. Revisar}\\Gestión de datos decide: corregir, renombrar o eliminar};
+  \node[paso,fill=bandlila,right=0.5cm of c] (d) {\textbf{4. Documentar}\\Quién pidió, quién ejecutó, cuándo y por qué};
+  \draw[flecha] (a) -- (b); \draw[flecha] (b) -- (c); \draw[flecha] (c) -- (d);
+\end{tikzpicture}
+\end{center}
+```
+
+\vspace{0.2cm}
+
+:::: columns
+
+::: {.column width="48%"}
+
+::: {.callout-note title="Dónde se reporta"}
+[Canal definido por el equipo: formulario de incidencias, correo o planilla de solicitudes.]
+:::
+
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important title="Mientras tanto"}
+No ingresar más datos en el registro afectado hasta que gestión de datos responda.
+:::
+
+:::
+
+::::
+
+# Práctica
+
+### Ejercicio 1
+
+
+
+:::: columns
+
+::: {.column width="60%"}
+
+::: {.callout-caution title="Ejercicio - Crear y completar un registro" icon=false}
+1. Ingresar al **proyecto definido**.
+2. Crear un registro con el ID de práctica entregado.
+3. Completar el primer instrumento.
+4. Elegir un estado para el formulario (ej. ***Incompleto, No verificado***) y guardar con *Guardar y Exit Form*.
+5. Comprobar el color del círculo en la *Consola de estado de registros*.
+:::
+
+:::
+
+::: {.column width="36%"}
+
+#### Tiempo
+
+15 minutos.
+
+#### Al terminar {.example}
+
+Se revisan los registros en la *Consola de estado de registros* y explica y ejemplifica por qué eligió ese estado (ej. qué podria haber pasado para que el registro quede incompleto?).
+
+:::
+
+::::
+
+### Ejercicio 2
+
+<!-- LAYOUT: 2 columnas (callout de ejercicio + bloques de apoyo) -->
+
+:::: columns
+
+::: {.column width="60%"}
+
+::: {.callout-caution title="Ejercicio - Corregir y reportar" icon=false}
+1. En su registro de práctica, cambiar una respuesta y escribir el motivo en el globo de comentarios.
+2. Abrir el ícono **H** de ese campo y revisar el historial.
+3. Intentar crear un registro con un ID que **ya existe**. ¿Qué mensaje aparece?
+4. Completar una solicitud de eliminación ficticia para un registro duplicado.
+:::
+
+:::
+
+::: {.column width="36%"}
+
+#### Tiempo
+
+15 minutos, en duplas.
+
+#### Al terminar {.example}
+
+Revisión grupal de las solicitudes: ¿tienen toda la información que necesita gestión de datos?
+
+:::
+
+::::
+
+### Errores frecuentes y cómo evitarlos
+
+<!-- LAYOUT: 1 columna con tabla -->
+
+| Error                                         | Cómo evitarlo                                              |
+|:----------------------------------------------|:-----------------------------------------------------------|
+| Crear el registro en el proyecto de práctica  | Revisar el nombre del proyecto antes de crear el registro   |
+| Escribir mal el ID de la familia              | Leerlo dos veces y compararlo con la hoja de registro       |
+| Ingresar la visita en la ola equivocada       | Confirmar la columna del evento en la *Record Home Page*    |
+| Perder datos al cambiar de formulario         | Guardar siempre con un botón *Save* antes de moverse        |
+| Dejar formularios en rojo sin explicación     | Registrar la incidencia o completar los datos faltantes     |
+| Crear un segundo registro para corregir el primero | Enviar una solicitud a gestión de datos                |
+
+: Lo observado con más frecuencia en el ingreso de datos
+
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+
+\Huge
+
+\banddestacado{Preguntas, comentarios y discusión}
+```
+
+
+### {.plain .noframenumbering}
+
+
+
+```{=latex}
+\bandcierre[Contacto - matias.placencio@uc.cl]
+```
